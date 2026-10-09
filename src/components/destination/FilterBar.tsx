@@ -49,7 +49,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search by destination name, state, country, or keyword (e.g. Manali, Amritsar, Beach)..."
+            placeholder="Search any destination worldwide (e.g. Shimla, Kasol, Paris, Tokyo, Goa)..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-stone-200 bg-stone-50/50 text-stone-900 placeholder:text-stone-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#16382B] focus:bg-white transition"

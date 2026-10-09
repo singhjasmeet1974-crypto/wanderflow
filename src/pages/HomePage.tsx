@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { DESTINATIONS } from '../data/destinations';
+import { DestinationService } from '../lib/destinationService';
 import { TRAVEL_GUIDES } from '../data/travelGuides';
 import { GROUP_TRIPS } from '../data/groupTrips';
 import { DestinationCard } from '../components/destination/DestinationCard';
@@ -30,6 +31,13 @@ export const HomePage: React.FC = () => {
   const [searchDestination, setSearchDestination] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<DestinationCategory | 'All'>('All');
   const [travelerCount, setTravelerCount] = useState<number>(2);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const suggestions = useMemo(() => {
+    return searchDestination.trim().length >= 2
+      ? DestinationService.getSuggestions(searchDestination, 5)
+      : [];
+  }, [searchDestination]);
 
   const handleHeroSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,7 +126,7 @@ export const HomePage: React.FC = () => {
             className="max-w-3xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-2xl border border-white/30 text-left grid grid-cols-1 sm:grid-cols-12 gap-2"
           >
             {/* Destination Input */}
-            <div className="sm:col-span-5 px-3 py-1.5 rounded-xl hover:bg-stone-50 transition border border-transparent focus-within:border-[#16382B]">
+            <div className="sm:col-span-5 px-3 py-1.5 rounded-xl hover:bg-stone-50 transition border border-transparent focus-within:border-[#16382B] relative">
               <label className="text-[10px] font-bold uppercase tracking-wider text-stone-600 block">
                 Destination
               </label>
@@ -126,12 +134,51 @@ export const HomePage: React.FC = () => {
                 <MapPin className="w-4 h-4 text-[#E0704D] shrink-0" />
                 <input
                   type="text"
-                  placeholder="Where to? (e.g. Manali, Amritsar, Goa)..."
+                  placeholder="Where to? (e.g. Manali, Shimla, Paris, Tokyo)..."
                   value={searchDestination}
-                  onChange={(e) => setSearchDestination(e.target.value)}
+                  onChange={(e) => {
+                    setSearchDestination(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                   className="w-full text-xs sm:text-sm font-semibold text-stone-900 bg-transparent focus:outline-none placeholder:text-stone-400 placeholder:font-normal"
                 />
               </div>
+
+              {/* Autocomplete Suggestions Dropdown */}
+              {showSuggestions && suggestions.length > 0 && (
+                <div className="absolute left-0 top-full mt-2 w-full sm:w-80 bg-white rounded-2xl shadow-2xl border border-stone-200 py-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+                  <div className="px-3 py-1 text-[10px] uppercase font-bold text-stone-400 tracking-wider">
+                    Quick Matches
+                  </div>
+                  {suggestions.map((dest) => (
+                    <button
+                      key={dest.id}
+                      type="button"
+                      onMouseDown={() => {
+                        setSearchDestination(dest.name);
+                        setShowSuggestions(false);
+                        navigate(`/explore?q=${encodeURIComponent(dest.name)}`);
+                      }}
+                      className="w-full px-3 py-2 text-left flex items-center gap-3 hover:bg-stone-50 transition cursor-pointer"
+                    >
+                      <img
+                        src={dest.imageUrl}
+                        alt={dest.name}
+                        className="w-9 h-9 rounded-lg object-cover shrink-0"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-bold text-stone-900 truncate">{dest.name}</p>
+                        <p className="text-[10px] text-stone-500 truncate">{dest.region}, {dest.country}</p>
+                      </div>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 font-semibold shrink-0">
+                        {dest.category}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Category Selector */}

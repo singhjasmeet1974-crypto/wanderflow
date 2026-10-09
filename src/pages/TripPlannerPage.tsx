@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { DESTINATIONS } from '../data/destinations';
+import { DestinationService } from '../lib/destinationService';
 import { StorageService } from '../lib/storage';
 import { useAuth } from '../context/AuthContext';
-import { Trip, TravelStyle, ItineraryDay } from '../types';
+import { Trip, TravelStyle, ItineraryDay, Destination } from '../types';
 import {
   Compass,
   Calendar,
@@ -21,8 +21,14 @@ export const TripPlannerPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const { user } = useAuth();
 
+  const allDestinations = useMemo(() => DestinationService.getAllDestinations(), []);
   const preselectedDestId = searchParams.get('dest') || 'manali';
-  const preselectedDestination = DESTINATIONS.find((d) => d.id === preselectedDestId) || DESTINATIONS[0];
+  const preselectedDestination = useMemo(() => {
+    return (
+      DestinationService.getDestinationById(preselectedDestId) ||
+      allDestinations[0]
+    );
+  }, [preselectedDestId, allDestinations]);
 
   const [destinationId, setDestinationId] = useState<string>(preselectedDestination.id);
   const [tripTitle, setTripTitle] = useState<string>(
@@ -49,7 +55,7 @@ export const TripPlannerPage: React.FC = () => {
   // Sync title when destination changes
   const handleDestinationChange = (id: string) => {
     setDestinationId(id);
-    const dest = DESTINATIONS.find((d) => d.id === id);
+    const dest = DestinationService.getDestinationById(id);
     if (dest) {
       setTripTitle(`${dest.name} Squad Adventure`);
     }
@@ -72,7 +78,7 @@ export const TripPlannerPage: React.FC = () => {
       return;
     }
 
-    const currentDest = DESTINATIONS.find((d) => d.id === destinationId) || DESTINATIONS[0];
+    const currentDest = DestinationService.getDestinationById(destinationId) || allDestinations[0];
     const daysCount = calculateDaysCount();
 
     // Construct daily itinerary structure
@@ -128,7 +134,7 @@ export const TripPlannerPage: React.FC = () => {
     navigate(`/trips/${newTrip.id}`);
   };
 
-  const selectedDest = DESTINATIONS.find((d) => d.id === destinationId) || DESTINATIONS[0];
+  const selectedDest = DestinationService.getDestinationById(destinationId) || allDestinations[0];
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
@@ -170,7 +176,7 @@ export const TripPlannerPage: React.FC = () => {
                 onChange={(e) => handleDestinationChange(e.target.value)}
                 className="w-full px-3.5 py-3 rounded-xl border border-stone-300 text-sm font-semibold bg-stone-50 focus:bg-white focus:ring-2 focus:ring-[#16382B] focus:outline-none"
               >
-                {DESTINATIONS.map((d) => (
+                {allDestinations.map((d) => (
                   <option key={d.id} value={d.id}>
                     {d.name} ({d.region}, {d.country})
                   </option>

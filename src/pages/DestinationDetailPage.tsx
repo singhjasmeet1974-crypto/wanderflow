@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { DESTINATIONS } from '../data/destinations';
+import { DestinationService } from '../lib/destinationService';
 import { StorageService } from '../lib/storage';
 import { WeatherWidget } from '../components/destination/WeatherWidget';
 import { DestinationMap } from '../components/destination/DestinationMap';
@@ -27,7 +27,9 @@ export const DestinationDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
 
-  const destination = DESTINATIONS.find((d) => d.id === id);
+  const destination = useMemo(() => {
+    return id ? DestinationService.getDestinationById(id) : null;
+  }, [id]);
 
   const [isSaved, setIsSaved] = useState<boolean>(() =>
     destination ? StorageService.isDestinationSaved(destination.id) : false

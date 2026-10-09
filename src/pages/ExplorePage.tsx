@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { DESTINATIONS } from '../data/destinations';
+import { useSearchParams, Link } from 'react-router-dom';
+import { DestinationService } from '../lib/destinationService';
 import { DestinationCard } from '../components/destination/DestinationCard';
 import { FilterBar } from '../components/destination/FilterBar';
 import { DestinationCategory, Destination } from '../types';
@@ -50,53 +50,21 @@ export const ExplorePage: React.FC = () => {
     setSearchParams(params, { replace: true });
   }, [searchQuery, selectedCategory, maxBudget, sortBy, setSearchParams]);
 
-  // Filter & Sort Logic
-  const filteredDestinations = useMemo(() => {
-    let result = DESTINATIONS.filter((dest) => {
-      // Text Search
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase().trim();
-        const matchesName = dest.name.toLowerCase().includes(q);
-        const matchesRegion = dest.region.toLowerCase().includes(q);
-        const matchesCountry = dest.country.toLowerCase().includes(q);
-        const matchesTags = dest.tags.some((tag) => tag.toLowerCase().includes(q));
-        if (!matchesName && !matchesRegion && !matchesCountry && !matchesTags) {
-          return false;
-        }
-      }
-
-      // Category filter
-      if (selectedCategory !== 'All' && dest.category !== selectedCategory) {
-        return false;
-      }
-
-      // Budget filter
-      if (dest.budgetEstimate.min > maxBudget) {
-        return false;
-      }
-
-      return true;
+  // Filter & Search Logic with Dynamic Discovery
+  const searchOutcome = useMemo(() => {
+    return DestinationService.searchDestinations(searchQuery, {
+      category: selectedCategory,
+      maxBudget,
+      sortBy,
     });
-
-    // Sorting
-    result.sort((a, b) => {
-      if (sortBy === 'popularity') {
-        return b.popularityScore - a.popularityScore;
-      }
-      if (sortBy === 'budget-asc') {
-        return a.budgetEstimate.min - b.budgetEstimate.min;
-      }
-      if (sortBy === 'budget-desc') {
-        return b.budgetEstimate.min - a.budgetEstimate.min;
-      }
-      if (sortBy === 'name') {
-        return a.name.localeCompare(b.name);
-      }
-      return 0;
-    });
-
-    return result;
   }, [searchQuery, selectedCategory, maxBudget, sortBy]);
+
+  const {
+    results: filteredDestinations,
+    hasDynamicDiscovery,
+    generatedDestination,
+    isFallbackSuggestion,
+  } = searchOutcome;
 
   const handleResetFilters = () => {
     setSearchQuery('');
@@ -226,12 +194,60 @@ export const ExplorePage: React.FC = () => {
         totalResultsCount={filteredDestinations.length}
       />
 
+      {/* Dynamic On-Demand Discovery Banner */}
+      {hasDynamicDiscovery && generatedDestination && (
+        <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#16382B] via-[#1b4332] to-[#235441] text-[#F3EFE6] border border-[#2d6b53] shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="flex items-start gap-3">
+            <div className="p-2.5 bg-[#E5A43B]/20 text-[#E5A43B] rounded-xl shrink-0 mt-0.5">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h3 className="font-bold text-sm sm:text-base text-white font-editorial">
+                  Custom Travel Guide Synthesized: {generatedDestination.name}
+                </h3>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E5A43B] text-[#0F261D] font-extrabold uppercase">
+                  ✨ Dynamic Discovery
+                </span>
+              </div>
+              <p className="text-xs text-stone-200 mt-1 max-w-2xl leading-relaxed">
+                {generatedDestination.shortDescription} Live meteorological coordinates, estimated student budgets, and a 3-day itinerary are ready!
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0 w-full md:w-auto">
+            <Link
+              to={`/destination/${generatedDestination.id}`}
+              className="px-4 py-2 rounded-xl bg-[#E0704D] hover:bg-[#cb5b38] text-white text-xs font-bold transition shadow-xs text-center flex-1 md:flex-none"
+            >
+              View Full Guide
+            </Link>
+            <Link
+              to={`/trips/new?dest=${generatedDestination.id}`}
+              className="px-4 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-semibold border border-white/20 transition text-center flex-1 md:flex-none"
+            >
+              Plan Trip
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Destinations Grid */}
       {filteredDestinations.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredDestinations.map((destination) => (
-            <DestinationCard key={destination.id} destination={destination} />
-          ))}
+        <div className="space-y-6">
+          {isFallbackSuggestion && (
+            <div className="flex items-center justify-between text-xs text-stone-500 border-b border-stone-200 pb-2">
+              <span className="font-medium">
+                Showing top match for <strong className="text-stone-800">"{searchQuery}"</strong> plus popular recommendations:
+              </span>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDestinations.map((destination) => (
+              <DestinationCard key={destination.id} destination={destination} />
+            ))}
+          </div>
         </div>
       ) : (
         /* Empty State */
@@ -241,19 +257,34 @@ export const ExplorePage: React.FC = () => {
           </div>
           <div className="space-y-1">
             <h3 className="text-xl font-bold text-stone-900 font-editorial">
-              No matching destinations found
+              No matching destinations in current filters
             </h3>
             <p className="text-xs text-stone-500 max-w-md mx-auto">
-              We couldn't find any places matching "{searchQuery}" under ₹{maxBudget.toLocaleString()} in the selected category.
+              {searchQuery
+                ? `Places matching "${searchQuery}" didn't meet the "${selectedCategory}" category or ₹${maxBudget.toLocaleString()} budget criteria.`
+                : `We couldn't find any places matching under ₹${maxBudget.toLocaleString()} in the selected category.`}
             </p>
           </div>
-          <button
-            onClick={handleResetFilters}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#16382B] text-white text-xs font-semibold hover:bg-[#235441] transition cursor-pointer"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset All Filters</span>
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button
+              onClick={handleResetFilters}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#16382B] text-white text-xs font-semibold hover:bg-[#235441] transition cursor-pointer"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Reset All Filters</span>
+            </button>
+            {searchQuery && (
+              <button
+                onClick={() => {
+                  setSelectedCategory('All');
+                  setMaxBudget(160000);
+                }}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#E0704D] text-white text-xs font-semibold hover:bg-[#cb5b38] transition cursor-pointer"
+              >
+                <span>Clear Filters &amp; View All</span>
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>

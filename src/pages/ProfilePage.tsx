@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { StorageService } from '../lib/storage';
-import { DESTINATIONS } from '../data/destinations';
+import { DestinationService } from '../lib/destinationService';
 import { TravelStyle, GroupTripInterest } from '../types';
 import {
   User,
@@ -57,7 +57,7 @@ export const ProfilePage: React.FC = () => {
     }
   };
 
-  const savedDestinations = DESTINATIONS.filter((d) =>
+  const savedDestinations = DestinationService.getAllDestinations().filter((d) =>
     savedDestinationIds.includes(d.id)
   );
 

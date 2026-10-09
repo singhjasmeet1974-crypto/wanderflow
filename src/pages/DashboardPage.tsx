@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { StorageService } from '../lib/storage';
-import { DESTINATIONS } from '../data/destinations';
+import { DestinationService } from '../lib/destinationService';
 import { TripCard } from '../components/trip/TripCard';
 import { DestinationCard } from '../components/destination/DestinationCard';
 import { PrintableTrip } from '../components/common/PrintableTrip';
@@ -38,7 +38,7 @@ export const DashboardPage: React.FC = () => {
     setTrips(StorageService.getTrips());
   };
 
-  const savedDestinations = DESTINATIONS.filter((d) =>
+  const savedDestinations = DestinationService.getAllDestinations().filter((d) =>
     savedDestinationIds.includes(d.id)
   );
 
