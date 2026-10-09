@@ -73,7 +73,7 @@ export const DashboardPage: React.FC = () => {
                 )}
               </div>
               <p className="text-xs sm:text-sm text-stone-300">
-                {user?.college || 'Guru Nanak Dev Engineering College (GNDEC IT)'} • Travel Style: <strong className="text-white">{user?.travelStyle || 'Student Group'}</strong>
+                {user?.college || 'Wanderflow Explorer'} • Travel Style: <strong className="text-white">{user?.travelStyle || 'Student Group'}</strong>
               </p>
               <p className="text-xs text-stone-400 italic">
                 "{user?.bio || 'Planning memorable student adventures with Wanderflow.'}"
@@ -130,10 +130,10 @@ export const DashboardPage: React.FC = () => {
 
           <div className="p-3 rounded-xl bg-white/5 border border-white/10">
             <span className="text-[10px] uppercase font-bold tracking-wider text-stone-400 block">
-              Campus Chapter
+              Explorer Club
             </span>
             <span className="text-sm font-bold truncate text-white mt-1 block">
-              GNDEC IT 2026
+              Wanderflow Community
             </span>
           </div>
         </div>

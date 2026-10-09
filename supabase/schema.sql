@@ -1,6 +1,6 @@
 -- ==============================================================================
 -- WANDERFLOW - SUPABASE POSTGRESQL RELATIONAL SCHEMA & ROW LEVEL SECURITY
--- College Training Project • Guru Nanak Dev Engineering College (GNDEC), B.Tech IT
+-- Relational Schema & Security Policies for Wanderflow Travel Platform
 -- ==============================================================================
 
 -- 1. PROFILES (Extends Supabase auth.users)

@@ -33,7 +33,7 @@ describe('StorageService Persistence', () => {
     const user = StorageService.getUserProfile();
     expect(user).toBeDefined();
     expect(user?.fullName).toBe(DEFAULT_DEMO_USER.fullName);
-    expect(user?.college).toContain('Guru Nanak Dev Engineering College');
+    expect(user?.college).toContain('Wanderflow');
   });
 
   it('saves and updates custom user profile', () => {

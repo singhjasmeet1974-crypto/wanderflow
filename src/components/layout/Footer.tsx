@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Compass, GraduationCap, MapPin, Shield, Heart, ArrowUpRight } from 'lucide-react';
+import { Compass, Shield, Heart, ArrowUpRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -20,15 +20,6 @@ export const Footer: React.FC = () => {
             <p className="text-sm text-stone-400 max-w-sm leading-relaxed">
               Explore More. Plan Better. Travel Together. A unified travel discovery and personalized day-by-day itinerary platform designed for student explorers, friends, and solo backpackers.
             </p>
-
-            <div className="p-3 bg-stone-900/80 rounded-xl border border-stone-800 flex items-start gap-3 text-xs text-stone-300">
-              <GraduationCap className="w-5 h-5 text-[#E5A43B] shrink-0 mt-0.5" />
-              <div>
-                <strong className="text-white block font-semibold">College Training Project</strong>
-                <span>Bachelor of Technology in Information Technology</span>
-                <span className="block text-stone-400">Guru Nanak Dev Engineering College (GNDEC), Ludhiana</span>
-              </div>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -117,7 +108,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Credits */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
           <p>
-            &copy; 2026 Wanderflow. Built with React, TypeScript &amp; Tailwind CSS for GNDEC IT College Training.
+            &copy; 2026 Wanderflow. Built with React, TypeScript &amp; Tailwind CSS.
           </p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1 text-stone-300">

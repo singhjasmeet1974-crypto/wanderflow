@@ -1,8 +1,6 @@
 # Wanderflow — Explore More. Plan Better. Travel Together.
 
-> **Four-Week College Training Project**  
-> **Bachelor of Technology in Information Technology**  
-> **Guru Nanak Dev Engineering College (GNDEC), Ludhiana**
+> **A modern travel discovery and day-by-day itinerary planning platform.**
 
 ---
 
@@ -34,7 +32,7 @@ Young travelers—especially college students and Gen-Z adventurers—face signi
 - **Provide live meteorological intelligence** via the free **Open-Meteo API** (latitude/longitude-based, requiring zero API keys) with graceful offline fallbacks.
 - **Design an honest external booking gateway** generating contextual search deep-links to trusted providers (Booking.com, Skyscanner, MakeMyTrip, Agoda, Airbnb) with clear non-transactional disclaimers.
 - **Prototype a Gen-Z Social Travel concept** allowing students to review curated group trip departures and register interest securely without exposing personal contact details.
-- **Deliver a production-ready, testable codebase** with unit test coverage, responsive design across mobile/desktop, and complete college training documentation.
+- **Deliver a production-ready, testable codebase** with unit test coverage, responsive design across mobile/desktop, and complete project documentation.
 
 ---
 
@@ -75,7 +73,7 @@ Young travelers—especially college students and Gen-Z adventurers—face signi
 - Interactive preparation checklists with completion counters.
 
 ### G. User Authentication & Dashboard
-- Supports both **Supabase Auth** and an instant **1-Click College Demo Sign In** (`aarav.sharma@gndec.ac.in`).
+- Supports both **Supabase Auth** and an instant **1-Click Demo Sign In** (`aarav.sharma@wanderflow.app`).
 - Personalized traveler dashboard with active trips, statistics, bookmarks, and one-click data reset.
 
 ---
@@ -120,9 +118,9 @@ Wander flow/
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Navbar.tsx          # Responsive navigation bar with mobile drawer
-│   │   │   └── Footer.tsx          # Comprehensive footer with GNDEC IT credits
+│   │   │   └── Footer.tsx          # Comprehensive footer with links and credits
 │   │   ├── common/
-│   │   │   ├── DemoBanner.tsx      # Top college training demo notice & reset button
+│   │   │   ├── DemoBanner.tsx      # Top demo mode notice & reset button
 │   │   │   └── PrintableTrip.tsx   # Window.print formatted trip itinerary modal
 │   │   ├── destination/
 │   │   │   ├── DestinationCard.tsx # Destination card with image fallback & heart button
@@ -226,7 +224,7 @@ For live college viva evaluation or classroom presentation:
 1. **Zero Configuration Needed:** Launch `npm run dev` and open the app in any browser.
 2. **Instant Demo Sign In:**
    - On the top banner or Navbar, click **Demo Sign In**.
-   - Automatically signs in as **Aarav Sharma (B.Tech IT, GNDEC)**.
+   - Automatically signs in as **Aarav Sharma (Wanderflow Explorer)**.
 3. **Pre-Seeded Sample Trip:**
    - Navigate to **Dashboard** or **My Trips**.
    - A realistic 4-day trip: *"Himalayan Mountain Escape with College Squad"* in Manali is pre-loaded with full daily activities and costs.
@@ -291,16 +289,14 @@ If connecting to an external live Supabase instance:
 
 1. **AI Personalized Recommendations:** Integrate LLM-based custom travel itineraries based on natural language student prompts.
 2. **Community Reviews & Verified Student Photos:** Allow authenticated students to upload geotagged hostel reviews.
-3. **Real Group Trip Matching & Identity Verification:** Secure college email verification (`@gndec.ac.in`) and KYC identity verification before pairing travelers.
+3. **Real Group Trip Matching & Identity Verification:** Secure email verification and KYC identity verification before pairing travelers.
 4. **Group Chat & In-App Expense Splitter:** Real-time chat per group trip and Splitwise-style group bill settlement.
 5. **Offline PWA Support:** Full Progressive Web App service worker caching for offline map viewing on high Himalayan trails.
 
 ---
 
-## 15. Project Team & Academic Credits
+## 15. Credits & License
 
-- **Institution:** Guru Nanak Dev Engineering College (GNDEC), Ludhiana
-- **Department:** Department of Information Technology
-- **Program:** Bachelor of Technology in Information Technology (B.Tech IT)
-- **Course:** Four-Week College Training Project
-- **Academic Year:** 2026
+- **Platform:** Wanderflow Travel Discovery & Itinerary Planner
+- **License:** MIT
+- **Year:** 2026

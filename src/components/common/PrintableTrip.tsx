@@ -164,7 +164,7 @@ export const PrintableTrip: React.FC<PrintableTripProps> = ({ trip, onClose }) =
           {/* Print Footer */}
           <div className="pt-4 border-t border-stone-300 text-[11px] text-stone-500 flex flex-wrap items-center justify-between gap-2">
             <div>
-              <span>Generated via <strong>Wanderflow</strong> • GNDEC IT College Training Project</span>
+              <span>Generated via <strong>Wanderflow</strong> • Travel Discovery &amp; Itinerary Planner</span>
             </div>
             <div>
               <span>Printed on: {new Date().toLocaleDateString()}</span>

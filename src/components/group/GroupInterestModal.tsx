@@ -126,7 +126,7 @@ export const GroupInterestModal: React.FC<GroupInterestModalProps> = ({
                   value={userEmail}
                   onChange={(e) => setUserEmail(e.target.value)}
                   required
-                  placeholder="aarav@gndec.ac.in"
+                  placeholder="aarav@wanderflow.app"
                   className="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-stone-50/50 focus:bg-white focus:ring-2 focus:ring-[#16382B] focus:outline-none"
                 />
               </div>
@@ -141,7 +141,7 @@ export const GroupInterestModal: React.FC<GroupInterestModalProps> = ({
                   type="text"
                   value={collegeOrCity}
                   onChange={(e) => setCollegeOrCity(e.target.value)}
-                  placeholder="GNDEC Ludhiana"
+                  placeholder="e.g. University / City"
                   className="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-stone-50/50 focus:bg-white focus:ring-2 focus:ring-[#16382B] focus:outline-none"
                 />
               </div>

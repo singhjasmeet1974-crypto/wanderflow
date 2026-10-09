@@ -11,12 +11,12 @@ const STORAGE_KEYS = {
 };
 
 export const DEFAULT_DEMO_USER: UserProfile = {
-  id: 'demo-user-gndec-01',
-  email: 'aarav.sharma@gndec.ac.in',
+  id: 'demo-user-01',
+  email: 'aarav.sharma@wanderflow.app',
   fullName: 'Aarav Sharma',
   avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
-  college: 'Guru Nanak Dev Engineering College (GNDEC), Ludhiana',
-  bio: 'Final year IT student, passionate backpacker, mountain lover, and lead explorer at Wanderflow.',
+  college: 'Wanderflow Explorers Club',
+  bio: 'Passionate backpacker, mountain lover, and lead explorer at Wanderflow.',
   travelStyle: 'Student Group',
   createdAt: '2026-02-15T10:00:00Z',
 };
@@ -24,7 +24,7 @@ export const DEFAULT_DEMO_USER: UserProfile = {
 // Seed sample trip for demo
 const SEED_SAMPLE_TRIP: Trip = {
   id: 'trip-manali-demo-101',
-  userId: 'demo-user-gndec-01',
+  userId: 'demo-user-01',
   destinationId: 'manali',
   destinationName: 'Manali, Himachal Pradesh',
   destinationImage: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1000&q=80',

@@ -118,7 +118,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             email,
             fullName: email.split('@')[0].replace(/[._]/g, ' '),
             avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
-            college: 'Guru Nanak Dev Engineering College (GNDEC)',
+            college: 'Wanderflow Explorers Club',
             bio: 'Travel enthusiast exploring the world with Wanderflow.',
             travelStyle: 'Student Group',
             createdAt: new Date().toISOString(),
@@ -144,7 +144,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fullName: string,
     email: string,
     password: string,
-    college: string = 'Guru Nanak Dev Engineering College (GNDEC)',
+    college: string = 'Wanderflow Explorers Club',
     travelStyle: TravelStyle = 'Student Group'
   ): Promise<{ success: boolean; error?: string }> => {
     setIsLoading(true);

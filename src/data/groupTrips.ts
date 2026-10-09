@@ -28,7 +28,7 @@ export const GROUP_TRIPS: GroupTrip[] = [
       'Strict zero-substance and community code of conduct enforced.',
       'Mandatory check-ins and emergency contact verification before trip.',
     ],
-    hostOrganizer: 'Wanderflow Campus Explorers Club (GNDEC Chapter)',
+    hostOrganizer: 'Wanderflow Campus Explorers Club',
   },
   {
     id: 'group-goa-coastal-creators',

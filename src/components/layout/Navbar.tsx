@@ -133,7 +133,7 @@ export const Navbar: React.FC = () => {
                         <p className="text-xs font-semibold text-stone-900">{user.fullName}</p>
                         <p className="text-[11px] text-stone-500 truncate">{user.email}</p>
                         <span className="inline-block mt-1 text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-medium border border-emerald-200">
-                          {user.college || 'GNDEC IT Traveler'}
+                          {user.college || 'Active Traveler'}
                         </span>
                       </div>
 
@@ -178,7 +178,7 @@ export const Navbar: React.FC = () => {
                   <button
                     onClick={loginAsDemo}
                     className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-stone-700 hover:text-[#16382B] hover:bg-stone-200/70 border border-stone-300 transition cursor-pointer"
-                    title="Sign in instantly using the pre-seeded GNDEC student profile"
+                    title="Sign in instantly with a demo explorer profile"
                   >
                     <Sparkles className="w-3.5 h-3.5 text-[#E5A43B]" />
                     Demo Sign In
@@ -276,7 +276,7 @@ export const Navbar: React.FC = () => {
                     className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-stone-300 text-stone-800 text-sm font-semibold bg-white hover:bg-stone-50 transition"
                   >
                     <Sparkles className="w-4 h-4 text-[#E5A43B]" />
-                    Demo Sign In (GNDEC IT)
+                    Demo Sign In
                   </button>
                   <Link
                     to="/auth"

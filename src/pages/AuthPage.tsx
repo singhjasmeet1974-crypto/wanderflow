@@ -25,10 +25,10 @@ export const AuthPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   // Form states
-  const [email, setEmail] = useState('aarav.sharma@gndec.ac.in');
-  const [password, setPassword] = useState('college2026');
+  const [email, setEmail] = useState('aarav.sharma@wanderflow.app');
+  const [password, setPassword] = useState('explorer2026');
   const [fullName, setFullName] = useState('Aarav Sharma');
-  const [college, setCollege] = useState('Guru Nanak Dev Engineering College (GNDEC)');
+  const [college, setCollege] = useState('Wanderflow Explorers Club');
   const [travelStyle, setTravelStyle] = useState<TravelStyle>('Student Group');
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -92,7 +92,7 @@ export const AuthPage: React.FC = () => {
               Evaluation Shortcut
             </span>
             <span className="text-[10px] px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">
-              GNDEC IT
+              Demo Profile
             </span>
           </div>
           <p className="text-[11px] text-amber-900 leading-relaxed">
@@ -179,7 +179,7 @@ export const AuthPage: React.FC = () => {
                     type="text"
                     value={college}
                     onChange={(e) => setCollege(e.target.value)}
-                    placeholder="GNDEC Ludhiana"
+                    placeholder="College or Community"
                     className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-[#16382B] focus:outline-none"
                   />
                 </div>
@@ -198,7 +198,7 @@ export const AuthPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="aarav@gndec.ac.in"
+                placeholder="aarav@wanderflow.app"
                 className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-[#16382B] focus:outline-none"
               />
             </div>

@@ -107,7 +107,7 @@ export const TripPlannerPage: React.FC = () => {
 
     const newTrip: Trip = {
       id: `trip-${Date.now()}`,
-      userId: user?.id || 'demo-user-gndec-01',
+      userId: user?.id || 'demo-user-01',
       destinationId: currentDest.id,
       destinationName: `${currentDest.name}, ${currentDest.region}`,
       destinationImage: currentDest.imageUrl,

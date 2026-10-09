@@ -10,7 +10,7 @@ export const TRAVEL_GUIDES: TravelGuide[] = [
     readTimeMinutes: 6,
     author: {
       name: 'Simran Kaur',
-      role: 'Student Travel Lead, GNDEC IT',
+      role: 'Student Travel Lead',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
     },
     publishedDate: 'March 2026',
@@ -209,7 +209,7 @@ export const TRAVEL_GUIDES: TravelGuide[] = [
     readTimeMinutes: 6,
     author: {
       name: 'Gurpreet Singh',
-      role: 'Wanderflow Lead Architect, GNDEC IT',
+      role: 'Wanderflow Lead Architect',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
     },
     publishedDate: 'March 2026',

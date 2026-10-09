@@ -100,7 +100,7 @@ export const HomePage: React.FC = () => {
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6 pt-10 pb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-[#F3EFE6] text-xs font-semibold shadow-xs animate-in fade-in duration-500">
             <Sparkles className="w-3.5 h-3.5 text-[#E5A43B]" />
-            <span>Wanderflow • College Training Platform • GNDEC IT</span>
+            <span>Wanderflow • Curated Travel &amp; Itinerary Planner</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight font-editorial drop-shadow-md leading-[1.08]">
