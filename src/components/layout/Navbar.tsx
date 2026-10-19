@@ -15,6 +15,8 @@ import {
   Sparkles,
   Heart,
   ChevronDown,
+  CalendarCheck,
+  Settings,
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -43,6 +45,7 @@ export const Navbar: React.FC = () => {
     { name: 'Explore', path: '/explore', icon: MapPin },
     { name: 'Travel Guides', path: '/guides', icon: BookOpen },
     { name: 'Group Trips', path: '/group-trips', icon: Users2, badge: 'Gen-Z' },
+    { name: 'My Bookings', path: '/bookings', icon: CalendarCheck, badge: 'Demo' },
     { name: 'My Trips', path: '/trips', icon: CalendarDays },
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
   ];
@@ -65,7 +68,7 @@ export const Navbar: React.FC = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2.5 group">
               <div className="w-10 h-10 rounded-xl bg-[#16382B] text-[#F3EFE6] flex items-center justify-center shadow-sm group-hover:bg-[#235441] transition-colors">
-                <Compass className="w-5 h-5 text-[#E5A43B] transition-transform duration-300 group-hover:rotate-45" />
+                <Compass className="w-5 h-5 text-[#E5A43B]" />
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold tracking-tight text-[#16382B] font-editorial flex items-center gap-1">
@@ -128,46 +131,63 @@ export const Navbar: React.FC = () => {
 
                   {/* Dropdown Menu */}
                   {userDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-stone-200 py-2 z-50 animate-in fade-in zoom-in-95 duration-100">
-                      <div className="px-4 py-2 border-b border-stone-100">
-                        <p className="text-xs font-semibold text-stone-900">{user.fullName}</p>
+                    <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl shadow-xl border border-stone-200 py-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+                      <div className="px-4 py-2.5 border-b border-stone-100">
+                        <p className="text-xs font-bold text-stone-900 truncate">{user.fullName}</p>
                         <p className="text-[11px] text-stone-500 truncate">{user.email}</p>
-                        <span className="inline-block mt-1 text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-medium border border-emerald-200">
-                          {user.college || 'Active Traveler'}
+                        <span className="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
+                          {user.college || 'Active Explorer'}
                         </span>
                       </div>
 
                       <div className="py-1">
                         <Link
-                          to="/dashboard"
+                          to="/profile"
                           className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100 hover:text-[#16382B]"
                         >
-                          <LayoutDashboard className="w-4 h-4 text-stone-400" />
-                          Dashboard
+                          <User className="w-4 h-4 text-stone-400" />
+                          <span>My Profile</span>
+                        </Link>
+                        <Link
+                          to="/bookings"
+                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100 hover:text-[#16382B]"
+                        >
+                          <CalendarCheck className="w-4 h-4 text-stone-400" />
+                          <span className="flex-1">My Bookings</span>
+                          <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 font-bold">
+                            Demo
+                          </span>
+                        </Link>
+                        <Link
+                          to="/profile?tab=saved"
+                          className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100 hover:text-[#16382B]"
+                        >
+                          <Heart className="w-4 h-4 text-stone-400" />
+                          <span>Saved Destinations</span>
                         </Link>
                         <Link
                           to="/trips"
                           className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100 hover:text-[#16382B]"
                         >
                           <CalendarDays className="w-4 h-4 text-stone-400" />
-                          My Trips &amp; Itineraries
+                          <span>My Trips</span>
                         </Link>
                         <Link
-                          to="/profile"
+                          to="/profile?tab=settings"
                           className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-stone-700 hover:bg-stone-100 hover:text-[#16382B]"
                         >
-                          <User className="w-4 h-4 text-stone-400" />
-                          Profile &amp; Bookmarks
+                          <Settings className="w-4 h-4 text-stone-400" />
+                          <span>Settings</span>
                         </Link>
                       </div>
 
                       <div className="border-t border-stone-100 pt-1">
                         <button
                           onClick={handleLogout}
-                          className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 cursor-pointer"
+                          className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 cursor-pointer text-left"
                         >
                           <LogOut className="w-4 h-4 text-rose-500" />
-                          Sign Out
+                          <span>Sign Out</span>
                         </button>
                       </div>
                     </div>
@@ -258,7 +278,44 @@ export const Navbar: React.FC = () => {
                     className="flex items-center gap-2 px-3.5 py-2 text-sm text-stone-700 hover:bg-stone-200/60 rounded-lg"
                   >
                     <User className="w-4 h-4 text-stone-500" />
-                    My Profile &amp; Saved Places
+                    <span>My Profile</span>
+                  </Link>
+
+                  <Link
+                    to="/bookings"
+                    className="flex items-center justify-between px-3.5 py-2 text-sm text-stone-700 hover:bg-stone-200/60 rounded-lg"
+                  >
+                    <div className="flex items-center gap-2">
+                      <CalendarCheck className="w-4 h-4 text-stone-500" />
+                      <span>My Bookings</span>
+                    </div>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">
+                      Demo
+                    </span>
+                  </Link>
+
+                  <Link
+                    to="/profile?tab=saved"
+                    className="flex items-center gap-2 px-3.5 py-2 text-sm text-stone-700 hover:bg-stone-200/60 rounded-lg"
+                  >
+                    <Heart className="w-4 h-4 text-stone-500" />
+                    <span>Saved Destinations</span>
+                  </Link>
+
+                  <Link
+                    to="/trips"
+                    className="flex items-center gap-2 px-3.5 py-2 text-sm text-stone-700 hover:bg-stone-200/60 rounded-lg"
+                  >
+                    <CalendarDays className="w-4 h-4 text-stone-500" />
+                    <span>My Trips &amp; Itineraries</span>
+                  </Link>
+
+                  <Link
+                    to="/profile?tab=settings"
+                    className="flex items-center gap-2 px-3.5 py-2 text-sm text-stone-700 hover:bg-stone-200/60 rounded-lg"
+                  >
+                    <Settings className="w-4 h-4 text-stone-500" />
+                    <span>Settings &amp; Demo Controls</span>
                   </Link>
 
                   <button
@@ -266,7 +323,7 @@ export const Navbar: React.FC = () => {
                     className="w-full flex items-center gap-2 px-3.5 py-2 text-sm text-rose-600 hover:bg-rose-50 rounded-lg text-left"
                   >
                     <LogOut className="w-4 h-4 text-rose-500" />
-                    Sign Out
+                    <span>Sign Out</span>
                   </button>
                 </div>
               ) : (

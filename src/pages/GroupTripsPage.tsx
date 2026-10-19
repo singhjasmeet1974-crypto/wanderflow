@@ -27,22 +27,22 @@ export const GroupTripsPage: React.FC = () => {
               Group Trips Hub
             </h1>
             <p className="text-xs sm:text-sm text-stone-600 max-w-2xl mt-1">
-              Curated student expeditions, fixed departure batches, and shared budget adventures for youth travelers and campus groups.
+              Curated expeditions, fixed departure batches, and shared budget adventures for youth travelers and explorer groups.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Transparent Prototype Notice Banner */}
+      {/* Safety & Community Framework Banner */}
       <section className="p-6 rounded-3xl bg-amber-50/80 border border-amber-200/90 text-amber-950 space-y-3">
         <div className="flex items-center gap-2">
           <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0" />
           <h2 className="text-sm font-bold uppercase tracking-wider text-amber-900">
-            College Project Prototype Notice &amp; Safety Framework
+            Community Expeditions &amp; Traveler Safety Framework
           </h2>
         </div>
         <p className="text-xs sm:text-sm leading-relaxed text-amber-900/90">
-          This feature represents the proposed Gen-Z social travel concept from the Wanderflow project synopsis. In this college prototype stage, batches and interest registrations are simulated and saved to local evaluation storage.
+          Wanderflow Group Expeditions unite like-minded travelers for budget-friendly shared journeys. Batch bookings and expression of interest are verified and coordinated through trusted community organizers.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs text-amber-950 font-medium">

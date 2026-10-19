@@ -6,7 +6,7 @@ import { DestinationService } from '../lib/destinationService';
 import { TripCard } from '../components/trip/TripCard';
 import { DestinationCard } from '../components/destination/DestinationCard';
 import { PrintableTrip } from '../components/common/PrintableTrip';
-import { Trip } from '../types';
+import { Trip, Booking } from '../types';
 import {
   LayoutDashboard,
   CalendarDays,
@@ -18,7 +18,9 @@ import {
   Clock,
   RotateCcw,
   ArrowRight,
+  CalendarCheck,
 } from 'lucide-react';
+
 
 export const DashboardPage: React.FC = () => {
   const { user, isDemoMode, resetDemoData } = useAuth();
@@ -26,11 +28,13 @@ export const DashboardPage: React.FC = () => {
 
   const [trips, setTrips] = useState<Trip[]>([]);
   const [savedDestinationIds, setSavedDestinationIds] = useState<string[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const [printableTrip, setPrintableTrip] = useState<Trip | null>(null);
 
   useEffect(() => {
     setTrips(StorageService.getTrips());
     setSavedDestinationIds(StorageService.getSavedDestinations());
+    setBookings(StorageService.getBookings());
   }, []);
 
   const handleDeleteTrip = (id: string) => {
@@ -83,6 +87,14 @@ export const DashboardPage: React.FC = () => {
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
+              to="/bookings"
+              className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm border border-white/20 shadow-md transition"
+            >
+              <CalendarCheck className="w-4 h-4 text-[#E5A43B]" />
+              <span>My Bookings</span>
+            </Link>
+
+            <Link
               to="/trips/new"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#E0704D] hover:bg-[#cb5b38] text-white font-bold text-xs sm:text-sm shadow-md transition"
             >
@@ -128,14 +140,20 @@ export const DashboardPage: React.FC = () => {
             </span>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-stone-400 block">
-              Explorer Club
+          <Link
+            to="/bookings"
+            className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition block group cursor-pointer"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-stone-400 block">
+                Demo Bookings
+              </span>
+              <CalendarCheck className="w-3.5 h-3.5 text-[#E5A43B] group-hover:scale-110 transition-transform" />
+            </div>
+            <span className="text-2xl font-bold font-editorial text-[#E5A43B] block">
+              {bookings.length}
             </span>
-            <span className="text-sm font-bold truncate text-white mt-1 block">
-              Wanderflow Community
-            </span>
-          </div>
+          </Link>
         </div>
       </section>
 

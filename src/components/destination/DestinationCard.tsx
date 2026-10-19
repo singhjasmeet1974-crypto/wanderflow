@@ -109,13 +109,24 @@ export const DestinationCard: React.FC<DestinationCardProps> = ({
             </span>
           </div>
 
-          <Link
-            to={`/destinations/${destination.id}`}
-            className="inline-flex items-center gap-1 text-xs font-bold text-[#16382B] group-hover:text-[#E0704D] transition"
-          >
-            <span>Explore</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              to={`/book-demo?dest=${destination.id}`}
+              className="inline-flex items-center gap-1 text-[11px] font-bold text-[#E0704D] hover:text-[#cb5b38] transition bg-[#E0704D]/10 hover:bg-[#E0704D]/20 px-2.5 py-1 rounded-lg"
+              title={`Start demo reservation for ${destination.name}`}
+            >
+              <Sparkles className="w-3 h-3 text-[#E0704D]" />
+              <span>Book Demo</span>
+            </Link>
+
+            <Link
+              to={`/destinations/${destination.id}`}
+              className="inline-flex items-center gap-1 text-xs font-bold text-[#16382B] group-hover:text-[#E0704D] transition"
+            >
+              <span>Explore</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
       </div>
     </article>

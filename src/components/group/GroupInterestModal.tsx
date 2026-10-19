@@ -28,7 +28,7 @@ export const GroupInterestModal: React.FC<GroupInterestModalProps> = ({
   const [userName, setUserName] = useState(user?.fullName || '');
   const [userEmail, setUserEmail] = useState(user?.email || '');
   const [collegeOrCity, setCollegeOrCity] = useState(
-    user?.college || 'Guru Nanak Dev Engineering College'
+    user?.college || 'Wanderflow Explorers Club'
   );
   const [travelerCount, setTravelerCount] = useState(1);
   const [notes, setNotes] = useState('');
@@ -64,7 +64,7 @@ export const GroupInterestModal: React.FC<GroupInterestModalProps> = ({
           <div>
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#E0704D] flex items-center gap-1">
               <Sparkles className="w-3.5 h-3.5" />
-              Gen-Z Social Travel Prototype
+              Community Expedition
             </span>
             <h3 className="text-xl font-bold text-stone-900 font-editorial mt-0.5">
               Express Interest in {trip.title}
@@ -78,14 +78,14 @@ export const GroupInterestModal: React.FC<GroupInterestModalProps> = ({
           </button>
         </div>
 
-        {/* Safety & Demo Disclaimer */}
+        {/* Safety & Community Notice */}
         <div className="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 text-xs text-amber-900 space-y-1">
           <div className="flex items-center gap-1.5 font-bold text-amber-950">
             <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
-            <span>Prototype Evaluation Notice</span>
+            <span>Community Expedition Notice</span>
           </div>
           <p className="leading-relaxed">
-            This records your interest locally for the college demonstration. We do not expose personal contact details or charge payment fees. Stranger-matching and ID verification systems are planned future enhancements.
+            This records your interest for the expedition squad. We safeguard personal contact details and do not charge upfront booking fees until trip batch sizes are verified.
           </p>
         </div>
 
@@ -135,13 +135,13 @@ export const GroupInterestModal: React.FC<GroupInterestModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="text-xs font-bold text-stone-700 block mb-1">
-                  College or Hometown
+                  Hometown or Community
                 </label>
                 <input
                   type="text"
                   value={collegeOrCity}
                   onChange={(e) => setCollegeOrCity(e.target.value)}
-                  placeholder="e.g. University / City"
+                  placeholder="e.g. Mumbai, Bangalore, or Club"
                   className="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-stone-50/50 focus:bg-white focus:ring-2 focus:ring-[#16382B] focus:outline-none"
                 />
               </div>

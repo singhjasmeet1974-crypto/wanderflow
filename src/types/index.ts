@@ -162,8 +162,12 @@ export interface UserProfile {
   avatarUrl: string;
   college: string;
   bio: string;
+  phone?: string;
+  cityOrCountry?: string;
+  preferredDestinations?: string[];
   travelStyle: TravelStyle;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface LiveWeatherData {
@@ -184,3 +188,79 @@ export interface BookingProviderLink {
   url: string;
   recommendedFor: string;
 }
+
+export interface RoomType {
+  id: string;
+  name: string;
+  pricePerNight: number;
+  maxGuests: number;
+  description: string;
+}
+
+export interface Accommodation {
+  id: string;
+  destinationId: string;
+  name: string;
+  type: 'Hostel' | 'Boutique Hotel' | 'Resort' | 'Heritage Stay' | 'Camp & Cabin';
+  location: string;
+  rating: number;
+  reviewCount: number;
+  pricePerNight: number;
+  currency: string;
+  imageUrl: string;
+  galleryImages: string[];
+  description: string;
+  amenities: string[];
+  roomTypes: RoomType[];
+}
+
+export type BookingStatus = 'Pending' | 'Confirmed' | 'Completed' | 'Cancelled';
+
+export interface BookingGuestDetails {
+  fullName: string;
+  email: string;
+  phone?: string;
+  specialRequests?: string;
+}
+
+export interface BookingPriceBreakdown {
+  nightlyRate: number;
+  nights: number;
+  rooms: number;
+  baseAmount: number;
+  taxesAndFees: number; // e.g. 12% sample GST/tourism fee
+  discountAmount?: number;
+  totalAmount: number;
+}
+
+export interface Booking {
+  id: string;
+  bookingReference: string; // e.g. WF-DEMO-2026-7841
+  userId: string;
+  destinationId: string;
+  destinationName: string;
+  destinationLocation: string;
+  destinationImage: string;
+  accommodationId?: string;
+  accommodationName: string;
+  accommodationImage: string;
+  roomType?: string;
+  checkIn: string; // YYYY-MM-DD
+  checkOut: string; // YYYY-MM-DD
+  nights: number;
+  guests: {
+    adults: number;
+    children: number;
+  };
+  rooms: number;
+  guestDetails: BookingGuestDetails;
+  priceBreakdown: BookingPriceBreakdown;
+  currency: string;
+  status: BookingStatus;
+  bookingType: 'demo';
+  cancellationReason?: string;
+  cancelledAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+

@@ -18,6 +18,9 @@ import { GroupTripsPage } from './pages/GroupTripsPage';
 import { GroupTripDetailPage } from './pages/GroupTripDetailPage';
 import { AuthPage } from './pages/AuthPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { BookingsPage } from './pages/BookingsPage';
+import { BookingDetailPage } from './pages/BookingDetailPage';
+import { DemoBookingPage } from './pages/DemoBookingPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export function App() {
@@ -55,6 +58,11 @@ export function App() {
               <Route path="/trips/new" element={<TripPlannerPage />} />
               <Route path="/trips/:id" element={<TripDetailPage />} />
 
+              {/* Demo Bookings Dashboard & Checkout */}
+              <Route path="/bookings" element={<BookingsPage />} />
+              <Route path="/bookings/:bookingId" element={<BookingDetailPage />} />
+              <Route path="/book-demo" element={<DemoBookingPage />} />
+
               {/* Authentication & Profile */}
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/login" element={<Navigate to="/auth" replace />} />
@@ -64,6 +72,7 @@ export function App() {
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
+
 
           {/* Persistent Comprehensive Footer */}
           <Footer />

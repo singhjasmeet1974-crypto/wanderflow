@@ -2,27 +2,28 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { DestinationService } from '../lib/destinationService';
 import { StorageService } from '../lib/storage';
+import { getAccommodationsForDestination } from '../data/accommodations';
 import { WeatherWidget } from '../components/destination/WeatherWidget';
 import { DestinationMap } from '../components/destination/DestinationMap';
 import { ExternalBookingModal } from '../components/trip/ExternalBookingModal';
 import {
   MapPin,
   Calendar,
-  Clock,
   Heart,
   PlusCircle,
   ExternalLink,
   CheckCircle2,
   AlertCircle,
-  Compass,
   ArrowLeft,
-  DollarSign,
   Sun,
   ShieldCheck,
   ChevronRight,
+  Star,
+  Sparkles,
 } from 'lucide-react';
 
 export const DestinationDetailPage: React.FC = () => {
+
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -30,6 +31,11 @@ export const DestinationDetailPage: React.FC = () => {
   const destination = useMemo(() => {
     return id ? DestinationService.getDestinationById(id) : null;
   }, [id]);
+
+  const accommodations = useMemo(() => {
+    return destination ? getAccommodationsForDestination(destination.id) : [];
+  }, [destination]);
+
 
   const [isSaved, setIsSaved] = useState<boolean>(() =>
     destination ? StorageService.isDestinationSaved(destination.id) : false
@@ -136,6 +142,14 @@ export const DestinationDetailPage: React.FC = () => {
               <span>{isSaved ? 'Saved' : 'Save Place'}</span>
             </button>
 
+            <Link
+              to={`/book-demo?dest=${destination.id}`}
+              className="px-4 py-3 rounded-xl bg-[#E0704D] hover:bg-[#cb5b38] text-white text-xs font-bold shadow-lg transition flex items-center gap-2"
+            >
+              <Sparkles className="w-4 h-4 text-[#E5A43B]" />
+              <span>Book Demo Trip</span>
+            </Link>
+
             <button
               onClick={() => setBookingModalOpen(true)}
               className="px-4 py-3 rounded-xl bg-white/20 border border-white/30 hover:bg-white/30 backdrop-blur-md text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
@@ -146,7 +160,7 @@ export const DestinationDetailPage: React.FC = () => {
 
             <Link
               to={`/trips/new?dest=${destination.id}`}
-              className="px-5 py-3 rounded-xl bg-[#E0704D] hover:bg-[#cb5b38] text-white text-xs font-bold shadow-lg transition flex items-center gap-2"
+              className="px-5 py-3 rounded-xl bg-[#16382B] hover:bg-[#235441] text-white text-xs font-bold shadow-lg transition flex items-center gap-2"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Plan Trip Here</span>
@@ -242,8 +256,95 @@ export const DestinationDetailPage: React.FC = () => {
             </div>
           </section>
 
+          {/* Curated Demo Stays & Accommodations */}
+          {accommodations.length > 0 && (
+            <section className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#E0704D]">
+                    Demo Booking Experience
+                  </span>
+                  <h2 className="text-2xl font-bold font-editorial text-stone-900 mt-0.5">
+                    Curated Stays in {destination.name}
+                  </h2>
+                </div>
+                <Link
+                  to={`/book-demo?dest=${destination.id}`}
+                  className="text-xs font-bold text-[#16382B] hover:text-[#E0704D] flex items-center gap-1"
+                >
+                  <span>Book Demo Trip</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {accommodations.map((acc) => (
+                  <div
+                    key={acc.id}
+                    className="p-5 rounded-2xl bg-white border border-[#E6E2D8] hover:border-[#16382B]/30 hover:shadow-md transition flex flex-col justify-between space-y-3"
+                  >
+                    <div className="space-y-2">
+                      <div className="relative h-36 rounded-xl overflow-hidden bg-stone-100">
+                        <img
+                          src={acc.imageUrl}
+                          alt={acc.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/75 text-white text-[10px] font-bold">
+                          {acc.type}
+                        </span>
+                        <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-white/90 text-stone-900 text-[10px] font-bold flex items-center gap-1">
+                          <Star className="w-3 h-3 text-[#E5A43B] fill-current" />
+                          {acc.rating} ({acc.reviewCount})
+                        </span>
+                      </div>
+
+                      <h3 className="text-base font-bold text-stone-900 font-editorial">
+                        {acc.name}
+                      </h3>
+
+                      <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed">
+                        {acc.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1 pt-1">
+                        {acc.amenities.slice(0, 3).map((amenity, i) => (
+                          <span
+                            key={i}
+                            className="text-[10px] px-2 py-0.5 rounded bg-stone-100 text-stone-600 font-medium"
+                          >
+                            {amenity}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-stone-100 flex items-center justify-between">
+                      <div>
+                        <span className="text-[10px] text-stone-400 block">Starting from</span>
+                        <strong className="text-sm font-bold text-[#16382B]">
+                          ₹{acc.pricePerNight.toLocaleString()}{' '}
+                          <span className="text-[10px] font-normal text-stone-500">/ night</span>
+                        </strong>
+                      </div>
+
+                      <Link
+                        to={`/book-demo?dest=${destination.id}&acc=${acc.id}`}
+                        className="px-3.5 py-1.5 rounded-xl bg-[#E0704D] hover:bg-[#cb5b38] text-white text-xs font-bold shadow-xs transition flex items-center gap-1.5"
+                      >
+                        <Sparkles className="w-3.5 h-3.5 text-[#E5A43B]" />
+                        <span>Book Demo</span>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Sample Daily Itinerary */}
           <section className="bg-white rounded-3xl border border-[#E6E2D8] p-6 sm:p-8 space-y-5 shadow-xs">
+
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-[#E0704D]">
