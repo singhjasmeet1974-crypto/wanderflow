@@ -22,6 +22,14 @@ export const DEFAULT_DEMO_USER: UserProfile = {
   cityOrCountry: 'Ludhiana, Punjab, India',
   preferredDestinations: ['manali', 'amritsar', 'rishikesh', 'goa'],
   travelStyle: 'Student Group',
+  emergencyContact: {
+    name: 'Rajesh Sharma',
+    relationship: 'Father',
+    phone: '+91 98111 22334',
+  },
+  dietaryPreferences: ['Vegetarian', 'Local Street Food Explorer'],
+  preferredCurrency: 'INR',
+  loyaltyPoints: 1450,
   createdAt: '2026-02-15T10:00:00Z',
   updatedAt: '2026-03-01T14:30:00Z',
 };

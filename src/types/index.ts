@@ -166,6 +166,14 @@ export interface UserProfile {
   cityOrCountry?: string;
   preferredDestinations?: string[];
   travelStyle: TravelStyle;
+  emergencyContact?: {
+    name: string;
+    relationship: string;
+    phone: string;
+  };
+  dietaryPreferences?: string[];
+  preferredCurrency?: 'INR' | 'USD' | 'EUR' | 'GBP';
+  loyaltyPoints?: number;
   createdAt: string;
   updatedAt?: string;
 }
