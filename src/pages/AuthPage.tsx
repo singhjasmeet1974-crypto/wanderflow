@@ -12,6 +12,8 @@ import {
   User,
   GraduationCap,
   ArrowRight,
+  ArrowLeft,
+  Home,
   AlertCircle,
   CheckCircle2,
 } from 'lucide-react';
@@ -64,7 +66,19 @@ export const AuthPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
+    <div className="min-h-[80vh] flex flex-col items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md mb-4 flex items-center justify-between">
+        <Link
+          to="/"
+          id="auth-back-home-btn"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B] transition bg-white/70 hover:bg-white px-3 py-1.5 rounded-xl border border-stone-200 shadow-2xs"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <Home className="w-3.5 h-3.5 text-[#E5A43B]" />
+          <span>Back to Home</span>
+        </Link>
+      </div>
+
       <div className="w-full max-w-md bg-white rounded-3xl border border-[#E6E2D8] p-6 sm:p-8 shadow-xl space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">

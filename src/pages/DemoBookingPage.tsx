@@ -20,6 +20,7 @@ import {
   User,
   Mail,
   Phone,
+  Home,
 } from 'lucide-react';
 
 export const DemoBookingPage: React.FC = () => {
@@ -178,6 +179,15 @@ export const DemoBookingPage: React.FC = () => {
       {/* Header */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
+          <Link
+            to="/"
+            className="text-xs text-stone-500 hover:text-[#16382B] flex items-center gap-1 font-medium"
+            title="Go to main default page"
+          >
+            <Home className="w-3.5 h-3.5 text-[#E5A43B]" />
+            <span>Home</span>
+          </Link>
+          <span className="text-stone-300">•</span>
           <Link
             to="/bookings"
             className="text-xs text-stone-500 hover:text-[#16382B] flex items-center gap-1 font-medium"

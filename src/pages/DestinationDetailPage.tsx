@@ -16,10 +16,10 @@ import {
   AlertCircle,
   ArrowLeft,
   Sun,
-  ShieldCheck,
   ChevronRight,
   Star,
   Sparkles,
+  Home,
 } from 'lucide-react';
 
 export const DestinationDetailPage: React.FC = () => {
@@ -58,13 +58,22 @@ export const DestinationDetailPage: React.FC = () => {
         <p className="text-sm text-stone-600">
           The requested destination could not be located in our curated catalogue.
         </p>
-        <Link
-          to="/explore"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-[#16382B] text-white rounded-xl text-xs font-semibold"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Explore</span>
-        </Link>
+        <div className="flex items-center justify-center gap-3 pt-2">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#16382B] text-white rounded-xl text-xs font-semibold"
+          >
+            <Home className="w-4 h-4 text-[#E5A43B]" />
+            <span>Return to Home</span>
+          </Link>
+          <Link
+            to="/explore"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-semibold border border-stone-200"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to Explore</span>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -95,8 +104,8 @@ export const DestinationDetailPage: React.FC = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F261D] via-black/40 to-transparent"></div>
 
-        {/* Back Link */}
-        <div className="absolute top-6 left-4 sm:left-8 z-10">
+        {/* Back and Home Links */}
+        <div className="absolute top-6 left-4 sm:left-8 z-10 flex items-center gap-2">
           <button
             onClick={() => navigate(-1)}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-md text-stone-200 text-xs font-semibold transition cursor-pointer"
@@ -104,6 +113,14 @@ export const DestinationDetailPage: React.FC = () => {
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back</span>
           </button>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-md text-stone-200 text-xs font-semibold transition"
+            title="Go to main default page"
+          >
+            <Home className="w-3.5 h-3.5 text-[#E5A43B]" />
+            <span>Home</span>
+          </Link>
         </div>
 
         {/* Hero Content Over Image */}

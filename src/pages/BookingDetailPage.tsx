@@ -24,6 +24,7 @@ import {
   ShieldAlert,
   DollarSign,
   ChevronRight,
+  Home,
 } from 'lucide-react';
 
 export const BookingDetailPage: React.FC = () => {
@@ -60,10 +61,17 @@ export const BookingDetailPage: React.FC = () => {
         <p className="text-xs sm:text-sm text-stone-600 max-w-md mx-auto">
           No reservation matching ID or reference <strong className="font-mono text-stone-900">{bookingId}</strong> could be found in your local demo history.
         </p>
-        <div className="pt-2">
+        <div className="pt-2 flex items-center justify-center gap-3">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#16382B] text-white rounded-xl text-xs font-semibold hover:bg-[#235441] transition"
+          >
+            <Home className="w-4 h-4 text-[#E5A43B]" />
+            <span>Return to Home</span>
+          </Link>
           <Link
             to="/bookings"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#16382B] text-white rounded-xl text-xs font-semibold hover:bg-[#235441] transition"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-100 text-stone-800 rounded-xl text-xs font-semibold hover:bg-stone-200 transition border border-stone-200"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Return to My Bookings</span>
@@ -161,6 +169,11 @@ export const BookingDetailPage: React.FC = () => {
       {/* Breadcrumbs & Navigation */}
       <div className="flex items-center justify-between">
         <nav aria-label="Breadcrumbs" className="flex items-center gap-2 text-xs text-stone-500">
+          <Link to="/" className="hover:text-[#16382B] font-medium flex items-center gap-1" title="Return to Home">
+            <Home className="w-3.5 h-3.5 text-[#E5A43B]" />
+            <span>Home</span>
+          </Link>
+          <ChevronRight className="w-3.5 h-3.5 text-stone-400" />
           <Link to="/bookings" className="hover:text-[#16382B] font-medium">
             My Bookings
           </Link>

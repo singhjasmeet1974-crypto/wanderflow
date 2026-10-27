@@ -14,6 +14,7 @@ import {
   ArrowLeft,
   CheckCircle2,
   AlertCircle,
+  Home,
 } from 'lucide-react';
 
 export const TripPlannerPage: React.FC = () => {
@@ -140,13 +141,24 @@ export const TripPlannerPage: React.FC = () => {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <Link
-          to="/trips"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-500 hover:text-[#16382B]"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to My Trips</span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-500 hover:text-[#16382B]"
+            title="Go to main default page"
+          >
+            <Home className="w-3.5 h-3.5 text-[#E5A43B]" />
+            <span>Home</span>
+          </Link>
+          <span className="text-stone-300">/</span>
+          <Link
+            to="/trips"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-500 hover:text-[#16382B]"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to My Trips</span>
+          </Link>
+        </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-stone-900 font-editorial">
           Create New Itinerary
         </h1>

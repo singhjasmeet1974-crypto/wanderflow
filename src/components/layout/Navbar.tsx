@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { StorageService } from '../../lib/storage';
 import {
+  Home,
   Compass,
   MapPin,
   BookOpen,
@@ -96,6 +97,7 @@ export const Navbar: React.FC = () => {
   }, [userDropdownOpen]);
 
   const navLinks = [
+    { name: 'Home', path: '/', icon: Home },
     { name: 'Explore', path: '/explore', icon: MapPin },
     { name: 'Travel Guides', path: '/guides', icon: BookOpen },
     { name: 'Group Trips', path: '/group-trips', icon: Users2, badge: 'Gen-Z' },
@@ -142,7 +144,7 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center gap-1 lg:gap-2">
+            <div className="hidden lg:flex items-center gap-1 xl:gap-2">
               {navLinks.map((link) => {
                 const Icon = link.icon;
                 const isActive = location.pathname === link.path;
@@ -150,7 +152,10 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    id={link.path === '/' ? 'nav-home-btn' : undefined}
+                    title={link.path === '/' ? 'Return to Home / Main default page' : link.name}
+                    aria-label={link.name}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-lg text-xs xl:text-sm font-medium transition-all ${
                       isActive
                         ? 'bg-[#16382B] text-white shadow-xs'
                         : 'text-stone-700 hover:text-[#16382B] hover:bg-stone-200/60'
@@ -169,7 +174,7 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Desktop Profile Icon / Avatar & Dropdown */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-3">
               <div className="relative" ref={dropdownRef}>
                 {/* Professional Profile Avatar Button (Always present) */}
                 <button
@@ -284,8 +289,25 @@ export const Navbar: React.FC = () => {
                       </div>
                     )}
 
-                    {/* Required 6 Core Navigation Actions */}
+                    {/* Required Core Navigation Actions */}
                     <div className="py-1.5 space-y-0.5">
+                      {/* 0. Home Page */}
+                      <Link
+                        to="/"
+                        onClick={() => setUserDropdownOpen(false)}
+                        className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-stone-800 hover:bg-stone-100/80 hover:text-[#16382B] transition group"
+                        role="menuitem"
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-stone-100 group-hover:bg-[#16382B] group-hover:text-white flex items-center justify-center transition text-stone-600">
+                          <Home className="w-4 h-4 text-[#E5A43B]" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="block leading-tight">Home Page</span>
+                          <span className="text-[10px] text-stone-400 font-normal">
+                            Return to main default page
+                          </span>
+                        </div>
+                      </Link>
                       {/* 1. My Profile */}
                       <Link
                         to="/profile"
@@ -430,7 +452,7 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="flex md:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-2">
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -445,7 +467,7 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-stone-200 bg-[#FAF9F6] px-4 pt-3 pb-6 space-y-4">
+          <div className="lg:hidden border-t border-stone-200 bg-[#FAF9F6] px-4 pt-3 pb-6 space-y-4">
             {/* Mobile Navigation Links */}
             <div className="space-y-1">
               {navLinks.map((link) => {
@@ -455,6 +477,7 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={link.path}
                     to={link.path}
+                    id={link.path === '/' ? 'mobile-nav-home-btn' : undefined}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium ${
                       isActive

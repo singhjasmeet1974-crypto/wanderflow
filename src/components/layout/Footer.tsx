@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Compass, Shield, Heart, ArrowUpRight } from 'lucide-react';
+import { Compass, Shield, Heart, ArrowUpRight, Home } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -28,6 +28,12 @@ export const Footer: React.FC = () => {
               Discovery
             </h4>
             <ul className="space-y-2 text-sm">
+              <li>
+                <Link to="/" className="hover:text-white transition flex items-center gap-1.5 text-stone-200">
+                  <Home className="w-3.5 h-3.5 text-[#E5A43B]" />
+                  <span>Home Page</span>
+                </Link>
+              </li>
               <li>
                 <Link to="/explore?category=Mountains" className="hover:text-white transition">
                   Mountain Escapes

@@ -14,6 +14,7 @@ import {
   ArrowRight,
   ShieldAlert,
   Heart,
+  Home,
 } from 'lucide-react';
 
 export const GroupTripDetailPage: React.FC = () => {
@@ -33,28 +34,48 @@ export const GroupTripDetailPage: React.FC = () => {
         <p className="text-sm text-stone-600">
           The requested group trip batch could not be found.
         </p>
-        <Link
-          to="/group-trips"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-[#16382B] text-white rounded-xl text-xs font-semibold"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Group Trips Hub</span>
-        </Link>
+        <div className="flex items-center justify-center gap-3 pt-2">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#16382B] text-white rounded-xl text-xs font-semibold"
+          >
+            <Home className="w-4 h-4 text-[#E5A43B]" />
+            <span>Return to Home</span>
+          </Link>
+          <Link
+            to="/group-trips"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-800 rounded-xl text-xs font-semibold border border-stone-200"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to Group Trips Hub</span>
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
-      {/* Back button */}
+      {/* Back button and Home link */}
       <div className="flex items-center justify-between border-b border-stone-200 pb-4">
-        <Link
-          to="/group-trips"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B]"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Group Trips Hub</span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B]"
+            title="Go to main default page"
+          >
+            <Home className="w-4 h-4 text-[#E5A43B]" />
+            <span>Home</span>
+          </Link>
+          <span className="text-stone-300">/</span>
+          <Link
+            to="/group-trips"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B]"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to Group Trips Hub</span>
+          </Link>
+        </div>
 
         <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#E5A43B] text-[#0F261D]">
           Prototype Batch

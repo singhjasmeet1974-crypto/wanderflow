@@ -18,6 +18,7 @@ import {
   ArrowLeft,
   Sparkles,
   Info,
+  Home,
 } from 'lucide-react';
 
 export const TripDetailPage: React.FC = () => {
@@ -49,13 +50,22 @@ export const TripDetailPage: React.FC = () => {
         <p className="text-sm text-stone-600">
           The requested trip itinerary does not exist or has been removed.
         </p>
-        <Link
-          to="/trips"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-[#16382B] text-white rounded-xl text-xs font-semibold"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to My Trips</span>
-        </Link>
+        <div className="flex items-center justify-center gap-3 pt-2">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#16382B] text-white rounded-xl text-xs font-semibold"
+          >
+            <Home className="w-4 h-4 text-[#E5A43B]" />
+            <span>Return to Home</span>
+          </Link>
+          <Link
+            to="/trips"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-800 rounded-xl text-xs font-semibold border border-stone-200"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to My Trips</span>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -140,13 +150,24 @@ export const TripDetailPage: React.FC = () => {
 
       {/* Back button & Actions Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-200 pb-4">
-        <Link
-          to="/trips"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B]"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to All Trips</span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B]"
+            title="Go to main default page"
+          >
+            <Home className="w-4 h-4 text-[#E5A43B]" />
+            <span>Home</span>
+          </Link>
+          <span className="text-stone-300">/</span>
+          <Link
+            to="/trips"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B]"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to All Trips</span>
+          </Link>
+        </div>
 
         <div className="flex items-center gap-2">
           <button

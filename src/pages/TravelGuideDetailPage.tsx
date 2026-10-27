@@ -11,6 +11,7 @@ import {
   Sparkles,
   CheckSquare,
   Square,
+  Home,
 } from 'lucide-react';
 
 export const TravelGuideDetailPage: React.FC = () => {
@@ -35,13 +36,22 @@ export const TravelGuideDetailPage: React.FC = () => {
         <p className="text-sm text-stone-600">
           We could not locate the requested travel guide.
         </p>
-        <Link
-          to="/guides"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-[#16382B] text-white rounded-xl text-xs font-semibold"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Travel Guides</span>
-        </Link>
+        <div className="flex items-center justify-center gap-3 pt-2">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#16382B] text-white rounded-xl text-xs font-semibold"
+          >
+            <Home className="w-4 h-4 text-[#E5A43B]" />
+            <span>Return to Home</span>
+          </Link>
+          <Link
+            to="/guides"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-800 rounded-xl text-xs font-semibold border border-stone-200"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Back to Travel Guides</span>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -62,13 +72,24 @@ export const TravelGuideDetailPage: React.FC = () => {
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
       {/* Top Navigation */}
       <div className="flex items-center justify-between border-b border-stone-200 pb-4">
-        <button
-          onClick={() => navigate('/guides')}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B] transition cursor-pointer"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>All Travel Guides</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B] transition"
+            title="Go to main default page"
+          >
+            <Home className="w-4 h-4 text-[#E5A43B]" />
+            <span>Home</span>
+          </Link>
+          <span className="text-stone-300">/</span>
+          <button
+            onClick={() => navigate('/guides')}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#16382B] transition cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>All Travel Guides</span>
+          </button>
+        </div>
 
         <div className="flex items-center gap-2">
           {copyNotice && (
